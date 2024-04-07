@@ -15,6 +15,7 @@ interface Customers {
   name: string
   email: string
   password: string
+  mobile:string
 
 }
 const MUITablea = () => {
@@ -29,7 +30,7 @@ const MUITablea = () => {
     try {
       const response = await fetch(`http://localhost:8000/api/customers`);
       const data = await response.json();
-      setallService(data.customers);
+      setallService(data);
 
     } catch (error) {
     }
@@ -60,20 +61,19 @@ const MUITablea = () => {
           <TableRow  style={{ backgroundColor: '#e8e6e6' , fontSize:50 }}>
             <TableCell align='center' style={{ fontSize:17 }}>#</TableCell>
             <TableCell align='center' style={{ fontSize:17 }}>Name</TableCell>
-            <TableCell align='center' style={{ fontSize:17 }}>ID</TableCell>
             <TableCell align='center' style={{ fontSize:17 }}>Email</TableCell>
+            <TableCell align='center' style={{ fontSize:17 }}>MOBILE</TableCell>
+            {/* <TableCell align='center' style={{ fontSize:17 }}>Passwords</TableCell> */}
             <TableCell align='center' style={{ fontSize:17 }}>Action</TableCell>
-            <TableCell align='center' style={{ fontSize:17 }}>Passwords</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
         {allServices.map((row, index) =>
             <TableRow key={row.name} sx={{ '&:last-of-type  td, &:last-of-type  th': { border: 0 } }} >
               <TableCell align='center'  style={{ fontSize:17 }}>{index+1}</TableCell>
-              <TableCell align='center'  style={{ fontSize:17 }}>{row.id}</TableCell>
               <TableCell align='center'  style={{ fontSize:17 }}>{row.name}</TableCell>
               <TableCell align='center'  style={{ fontSize:17 }}>{row.email}</TableCell>
-              <TableCell align='center'  style={{ fontSize:17 }}>{row.password}</TableCell>
+              <TableCell align='center'  style={{ fontSize:17 }}>{row.mobile}</TableCell>
               <TableCell align='center'  style={{ fontSize:17 }}><IconButton aria-label="edit" onClick={edit}><EditIcon /></IconButton>
               <IconButton aria-label="delete" onClick={deleteform}><DeleteIcon /></IconButton></TableCell>
             </TableRow>

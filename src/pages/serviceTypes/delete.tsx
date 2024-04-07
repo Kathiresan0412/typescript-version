@@ -19,7 +19,7 @@ const DeleteForm = ({ onClose, input }: { onClose: any, input: number }) => {
     e.preventDefault();
     try {
       // Make PUT request to update service
-      await axios.delete(`http://localhost:8000/api/service-types/${input}`, {
+      await axios.delete(`https://backendserve-production.up.railway.app/api/service-types/${input}`, {
       });
       setSuccess(true); // Set success state to true
       setMessage('Service Deleted successfully.');

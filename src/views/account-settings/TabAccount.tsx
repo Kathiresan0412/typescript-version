@@ -87,7 +87,6 @@ const TabAccount = () => {
               </Box>
             </Box>
           </Grid>
-
           <Grid item xs={12} sm={6}>
             <TextField fullWidth label='Username' placeholder='johnDoe' defaultValue='johnDoe' />
           </Grid>
@@ -128,7 +127,6 @@ const TabAccount = () => {
           <Grid item xs={12} sm={6}>
             <TextField fullWidth label='Company' placeholder='ABC Pvt. Ltd.' defaultValue='ABC Pvt. Ltd.' />
           </Grid>
-
           {openAlert ? (
             <Grid item xs={12} sx={{ mb: 3 }}>
               <Alert
@@ -147,7 +145,6 @@ const TabAccount = () => {
               </Alert>
             </Grid>
           ) : null}
-
           <Grid item xs={12}>
             <Button variant='contained' sx={{ marginRight: 3.5 }}>
               Save Changes

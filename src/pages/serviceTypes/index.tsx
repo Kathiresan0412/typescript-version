@@ -9,21 +9,14 @@ import EditForm from './edit'
 import DeleteForm from './delete'
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { IServiceType } from '../InterFaces/page'
 
-interface ServiceType {
-  index:number
-  id: string
-  name: string
-  description: string
 
-}
 const MUITablea = () => {
-  const [allServices, setallService] = useState([] as ServiceType[]);
+  const [allServices,setallService] = useState([] as IServiceType[]);
   const [showForm1, setShowForm1] = useState(false);
   const [editForm, setEditForm1] = useState(false);
   const [deleteForm, setDeleteForm1] = useState(false);
-
-  //const [indexValue, setIndex] = useState();
 
   const [selectedServiceId, setSelectedServiceId] = useState(1);
 
@@ -34,7 +27,7 @@ const MUITablea = () => {
   useEffect(() => { getServices(); }, [])
   const getServices = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/service-types`);
+      const response = await fetch(`https://backendserve-production.up.railway.app/api/service-types`);
       const data = await response.json();
       setallService(data);
 
@@ -66,7 +59,6 @@ const MUITablea = () => {
               <TableHead >
                 <TableRow style={{ backgroundColor: '#e8e6e6', fontSize: 50 }}>
                   <TableCell align='center' style={{ fontSize: 17 }}>#</TableCell>
-                  <TableCell align='center' style={{ fontSize: 17 }}>ID</TableCell>
                   <TableCell align='center' style={{ fontSize: 17 }}>Name</TableCell>
                   <TableCell align='center' style={{ fontSize: 17 }}>description</TableCell>
                   <TableCell align='center' style={{ fontSize: 17 }}>Action</TableCell>
@@ -76,7 +68,6 @@ const MUITablea = () => {
                 {allServices.map((row, index) =>
                  <TableRow key={row.id}  onClick={() => handleRowClick(row.id)} sx={{ '&:last-of-type  td, &:last-of-type  th': { border: 0 } }} >
                     <TableCell align='center' style={{ fontSize: 17 }}>{index + 1}</TableCell>
-                    <TableCell align='center' style={{ fontSize: 17 }}>{row.id}</TableCell>
                     <TableCell align='center' style={{ fontSize: 17 }}>{row.name}</TableCell>
                     <TableCell align='center' style={{ fontSize: 17 }}>{row.description}</TableCell>
                     <TableCell align='center' style={{ fontSize: 17 }}><IconButton aria-label="edit" onClick={edit}><EditIcon /></IconButton>

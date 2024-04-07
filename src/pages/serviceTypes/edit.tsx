@@ -11,6 +11,8 @@ import 'text-encoding-polyfill';
 import axios from 'axios';
 import { useRouter } from 'next/router'
 import { FaCheckCircle } from 'react-icons/fa';
+import { IServiceType } from '../InterFaces/page'
+
 
   const EditForm = ({ onClose, input }: { onClose: any, input: number  }) => {
     // Component logic
@@ -18,16 +20,19 @@ import { FaCheckCircle } from 'react-icons/fa';
   const [description, setDescription] = useState('');
   const [message, setMessage] = useState<string>('');
   const [success, setSuccess] = useState<boolean>(false);
+  const [updateData, setUpdateData] = useState<IServiceType[]>([]);
+
+  //setUpdateData([...updateData, { ...updateData[1], name: "" }]);
+
 
 const route=useRouter();
   useEffect(() => {
-    // Fetch service data when component mounts
     getServices();
   }, []);
 
   const getServices = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/service-types/${input}`);
+      const response = await fetch(`https://backendserve-production.up.railway.app/api/service-types/${input}`);
       const data = await response.json();
       setServiceName(data.name);
       setDescription(data.description);
@@ -39,7 +44,7 @@ const route=useRouter();
     e.preventDefault();
     try {
       // Make PUT request to update service
-      await axios.put(`http://localhost:8000/api/service-types/${input}`, {
+      await axios.put(`https://backendserve-production.up.railway.app/api/service-types/${input}`, {
         name: serviceName,
         description: description
       });
@@ -52,6 +57,11 @@ const route=useRouter();
       console.error('Error updating service:', error);
       setMessage('Failed to update service. Please try again.');
     }
+  };
+
+  const handleDataChange = () => {
+    const newData = [...updateData];
+    setUpdateData(newData);
   };
 
   return (
@@ -74,7 +84,9 @@ const route=useRouter();
                 label='Service Type Name'
                 placeholder='Service Type Name'
                 value={serviceName}
-                onChange={(e) => setServiceName(e.target.value)}
+                onChange={() =>handleDataChange()}
+
+              //  onChange={(e) => setServiceName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>

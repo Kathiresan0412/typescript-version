@@ -23,7 +23,7 @@ const [success, setSuccess] = useState<boolean>(false);
     e.preventDefault();
     try {
       // Make PUT request to update service
-      await axios.post(`http://localhost:8000/api/service-types/`, {
+      await axios.post(`https://backendserve-production.up.railway.app/api/service-types`, {
         name: serviceName,
         description: description
       });

@@ -25,9 +25,9 @@ const MUITablea = () => {
   useEffect(() => { getServices(); }, [])
   const getServices = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/services`);
+      const response = await fetch(`http://127.0.0.1:8000/api/providers`);
       const data = await response.json();
-      setallService(data.services);
+      setallService(data);
 
     } catch (error) {
     }

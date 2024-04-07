@@ -16,6 +16,7 @@ interface Provider {
   email: string
   location: string
   password: string
+  mobile: string
 
 }
 const MUITablea = () => {
@@ -53,38 +54,49 @@ const MUITablea = () => {
             style={{ position: 'absolute', top: 5, right: 7, zIndex: 1 }} onClick={add}>+ ADD
           </Button>
           <CardHeader title='All Service Providers' titleTypographyProps={{ variant: 'h6' }}
-           style={{ backgroundColor: '' , fontSize:20 }}/>
+            style={{ backgroundColor: '', fontSize: 20 }} />
           <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} size='small' aria-label='a dense table'>
-        <TableHead>
-          <TableRow  style={{ backgroundColor: '#e8e6e6' , fontSize:20 }}>
-          <TableCell align='center'  style={{ fontSize:17 }}>#</TableCell>
-            <TableCell align='center'  style={{ fontSize:17 }}>ID</TableCell>
-            <TableCell align='center'  style={{ fontSize:17 }}>Name</TableCell>
+            <Table sx={{ minWidth: 650 }} size='small' aria-label='a dense table'>
+              <TableHead>
+                <TableRow style={{ backgroundColor: '#e8e6e6', fontSize: 20 }}>
+                  <TableCell align='center' style={{ fontSize: 17 }}>#</TableCell>
+                  {/* <TableCell align='center'  style={{ fontSize:17 }}>ID</TableCell> */}
+                  <TableCell align='center' style={{ fontSize: 17 }}>Name</TableCell>
+                  <TableCell align='center' style={{ fontSize: 17 }}>Email</TableCell>
+                  <TableCell align='center' style={{ fontSize: 17 }}>Mobile</TableCell>
+                  <TableCell align='center' style={{ fontSize: 17 }}>Location</TableCell>
+                  <TableCell align='center' style={{ fontSize: 17 }}>Action</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {allServices.map((row, index) =>
+                  <TableRow key={row.name} sx={{ '&:last-of-type  td, &:last-of-type  th': { border: 0 } }}>
+                    <TableCell align='center' style={{ fontSize: 15 }}>{index + 1}</TableCell>
+                    {/* <TableCell align='center'  style={{ fontSize:17 }}>{row.id}</TableCell> */}
+                    <TableCell align='center' style={{ fontSize: 15 }}>
+                      <div className="d-flex align-items-center text-hover-success">
+                        <div className="avatar w-56 m-2 no-shadow gd-success">
+                          <svg xmlns="https://tacomaweekly.com/24-05-2022-01-53-11-pm-4214233.jpg" width="16" height="16" >
+                          </svg>
+                        </div>
+                        <div className="px-4 flex">
 
-            <TableCell align='center'  style={{ fontSize:17 }}>Email</TableCell>
-            <TableCell align='center'  style={{ fontSize:17 }}>Passwords</TableCell>
-            <TableCell align='center'  style={{ fontSize:17 }}>Location</TableCell>
-            <TableCell align='center'  style={{ fontSize:17 }}>Action</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {allServices.map((row ,index)=>
-            <TableRow key={row.name} sx={{ '&:last-of-type  td, &:last-of-type  th': { border: 0 } }}>
-              <TableCell align='center'  style={{ fontSize:17 }}>{index}</TableCell>
-              <TableCell align='center'  style={{ fontSize:17 }}>{row.id}</TableCell>
-              <TableCell align='center' style={{ fontSize:17 }}>{row.name}</TableCell>
-              <TableCell align='center'  style={{ fontSize:17 }}>{row.email}</TableCell>
-              <TableCell align='center'  style={{ fontSize:17 }}>{row.password}</TableCell>
-              <TableCell align='center'  style={{ fontSize:17 }}>{row.location}</TableCell>
-              <TableCell align='center' ><IconButton aria-label="edit" onClick={edit}><EditIcon /></IconButton>
-                <IconButton aria-label="delete" onClick={deleteform}><DeleteIcon /></IconButton>
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                        {row.name}
+                        </div>
+
+                      </div>
+                    </TableCell>
+                    <TableCell align='center' style={{ fontSize: 15 }}>{row.email}</TableCell>
+                    <TableCell align='center' style={{ fontSize: 15 }}>{row.mobile}</TableCell>
+                    <TableCell align='center' style={{ fontSize: 15 }}>{row.location}</TableCell>
+                    <TableCell align='center' ><IconButton aria-label="edit" onClick={edit}><EditIcon /></IconButton>
+                      <IconButton aria-label="delete" onClick={deleteform}><DeleteIcon /></IconButton>
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Card>
       </Grid>
       <DatePickerWrapper>

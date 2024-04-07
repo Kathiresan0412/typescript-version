@@ -91,11 +91,11 @@ const TableBasic = ({ data }: any) => {
 
       <Modal open={editForm} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
-        <EditForm onClose={() => setEditForm1(false)} />
+        <EditForm onClose={() => setEditForm1(false)} input={0} />
 
       </Modal>
       <Modal open={deleteForm} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <DeleteForm onClose={() => setDeleteForm1(false)} />
+        <DeleteForm onClose={() => setDeleteForm1(false)} input={0} />
       </Modal>
     </TableContainer>
   )
