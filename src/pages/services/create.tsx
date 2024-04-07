@@ -85,7 +85,7 @@ const CreateForm = ({ onClose }: { onClose: any }) => {
     getCategorias();
   })
   const getCategorias = async () => {
-    const res = await fetch("https://backendserve-production.up.railway.app/api/service-types", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/service-types`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     })

@@ -62,7 +62,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
   }, []);
 
   const getCategorias = async () => {
-    const res = await fetch("https://backendserve-production.up.railway.app/api/service-types", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/service-types`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     })
@@ -72,7 +72,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
   }
   const getServices = async () => {
     try {
-      const response = await fetch(`https://backendserve-production.up.railway.app/api/services/${input}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${input}`);
       const data = await response.json();
       setServiceName(data.name);
       setDescription(data.description);
@@ -86,7 +86,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
     e.preventDefault();
     try {
       // Make PUT request to update service
-      await axios.put(`https://backendserve-production.up.railway.app/api/services/${input}`, {
+      await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/${input}`, {
         name: serviceName,
         description: description,
         service_type_id: serviceType,
