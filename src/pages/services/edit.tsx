@@ -59,7 +59,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
   useEffect(() => {
     getServices();
     getCategorias();
-  }, []);
+  },);
 
   const getCategorias = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/service-types`, {
@@ -103,7 +103,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
     }
   };
 
-   const [imgSrc, setImgSrc] = useState<string>('/images/avatars/1.png')
+   const [, setImgSrc] = useState<string>('/images/avatars/1.png')
 
   const onChange = (file: ChangeEvent) => {
     const reader = new FileReader()

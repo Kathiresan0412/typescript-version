@@ -28,7 +28,7 @@ import { IServiceType } from '../InterFaces/page'
 const route=useRouter();
   useEffect(() => {
     getServices();
-  }, []);
+  },);
 
   const getServices = async () => {
     try {
