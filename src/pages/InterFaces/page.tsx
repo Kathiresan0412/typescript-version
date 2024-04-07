@@ -26,3 +26,10 @@ export interface IServiceType {
   description: string
 }
 
+
+const EditForm=()=>{
+return(<></>)
+}
+export default EditForm;
+
+
