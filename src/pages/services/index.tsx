@@ -1,7 +1,7 @@
-import Grid from '@mui/material/Grid'
+
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
-import { Avatar, Button, IconButton, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import { Avatar, Button, Grid, IconButton, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import { useEffect, useState } from 'react'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import CreateForm from './create'
@@ -45,7 +45,7 @@ const MUITablea = () => {
 
   return (
     <Grid container spacing={6} >
-      <Grid item xs={12}>
+      <Grid  item xs={12}><></>
         <Card style={{ position: 'relative' }}>
           <Button type='submit' variant='contained' size='large'
             style={{ position: 'absolute', top: 5, right: 7, zIndex: 1 }} onClick={add}>+ ADD
@@ -64,8 +64,6 @@ const MUITablea = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-
-
                 {allServices?.map((row, index) =>
                   <TableRow key={row.id} onClick={() => handleRowClick(row.id)} sx={{ '&:last-of-type  td, &:last-of-type  th': { border: 0 } }} >
                     <TableCell align='center' style={{ fontSize: 17 }}>{index + 1}</TableCell>
@@ -86,7 +84,6 @@ const MUITablea = () => {
                 )}
 
               </TableBody>
-
             </Table>
           </TableContainer>
         </Card>
@@ -102,9 +99,7 @@ const MUITablea = () => {
       </DatePickerWrapper>
 
       <Modal open={editForm} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-
         <EditForm onClose={() => setEditForm1(false)} input={selectedServiceId} />
-
       </Modal>
       <Modal open={deleteForm} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <DeleteForm onClose={() => setDeleteForm1(false)} input={selectedServiceId} />
