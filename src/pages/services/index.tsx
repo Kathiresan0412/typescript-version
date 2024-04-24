@@ -71,9 +71,8 @@ const MUITablea = () => {
                       <Avatar
                         alt={row.name}
                         src={row.img}
-                        sx={{ width: 56, height: 56 }}
-                      />&nbsp;&nbsp;
-                       {row.name}
+                        sx={{ width: 56, height: 60 }}
+                      />&nbsp;&nbsp; {row.name}
                     </TableCell>
                     <TableCell align='center' style={{ fontSize: 17 }}>{row.service_type_name}</TableCell>
                     <TableCell align='center' style={{ fontSize: 17, minWidth: 450 }}>{row.description}</TableCell>

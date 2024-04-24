@@ -11,7 +11,6 @@ import axios from 'axios';
 import CloseIcon from '@material-ui/icons/Close';
 import { useRouter } from 'next/router'
 import { ChangeEvent, ElementType, useEffect, useState } from 'react'
-import { FaCheckCircle } from 'react-icons/fa'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
 import FormControl from '@mui/material/FormControl'
@@ -19,9 +18,7 @@ import Box from '@mui/material/Box'
 import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import { IconButton, InputLabel } from '@mui/material'
-
-// import { Select } from 'mdi-material-ui'
-// import { MenuItem } from '@mui/material'
+import AlertMessge from 'src/commponent/messge'
 
 const ImgStyled = styled('img')(({ theme }) => ({
   width: 120,
@@ -59,7 +56,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
   useEffect(() => {
     getServices();
     getCategorias();
-  },);
+  },[]);
 
   const getCategorias = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/service-types`, {
@@ -72,7 +69,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
   }
   const getServices = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${input}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/services/${input}`);
       const data = await response.json();
       setServiceName(data.name);
       setDescription(data.description);
@@ -86,7 +83,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
     e.preventDefault();
     try {
       // Make PUT request to update service
-      await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/${input}`, {
+      await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/services/${input}`, {
         name: serviceName,
         description: description,
         service_type_id: serviceType,
@@ -123,10 +120,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
       </Grid>
       <Divider sx={{ margin: 0 }} ></Divider>
       {success && (
-        <>
-          <      FaCheckCircle color="green" size={24} />
-          <p style={{ display: "inline-block", marginLeft: "5px" }}>{message}</p>
-        </>
+        <AlertMessge passedValue={message}/>
       )}
       {!success && (
         <form onSubmit={handleSubmit}>
@@ -137,7 +131,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
                   fullWidth
                   label='Service Name'
                   placeholder='Service Name'
-                  value={serviceName}
+                 value={serviceName}
                   onChange={(e) => setServiceName(e.target.value)}
                 />
               </Grid>
@@ -145,14 +139,13 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
               <FormControl fullWidth>
               <InputLabel>Service Type</InputLabel>
                 <Select
-
                   labelId="demo-simple-select-filled-label"
                   id="demo-simple-select-filled"
                   value={serviceType}
                   onChange={(ev) => setServiceType(ev.target.value.toString())}
                 >
                   {categorias.map((categoria: any) => (
-                    <MenuItem key={categoria.id} value={categoria.id}>{categoria.name}</MenuItem>
+                    <MenuItem key={categoria.id} value={categoria.id} defaultValue={serviceType}>{categoria.name}</MenuItem>
                   ))}
                 </Select>
                 </FormControl>

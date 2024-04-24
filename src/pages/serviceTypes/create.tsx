@@ -10,7 +10,7 @@ import 'text-encoding-polyfill';
 import axios from 'axios';
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { FaCheckCircle } from 'react-icons/fa'
+import AlertMessge from 'src/commponent/messge'
 
 const CreateForm = ({onClose}:{onClose:any}) => {
 const route=useRouter();
@@ -23,32 +23,27 @@ const [success, setSuccess] = useState<boolean>(false);
     e.preventDefault();
     try {
       // Make PUT request to update service
-      await axios.post(`https://backendserve-production.up.railway.app/api/service-types`, {
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/service-types`, {
         name: serviceName,
         description: description
       });
       setSuccess(true); // Set success state to true
-      setMessage('Service updated successfully.');
+      setMessage('Service Type Created successfully.');
 
        route.reload();
 
     } catch (error) {
-      console.error('Error updating service:', error);
+
       setMessage('Failed to update service. Please try again.');
     }
   };
 
   return (
     <Card className='modal1'>
-
-      <CardHeader title='Edition for A Service' titleTypographyProps={{ variant: 'h6' }}  ></CardHeader>
+      <CardHeader title='Edition for A Service Type' titleTypographyProps={{ variant: 'h6' }}  ></CardHeader>
       <Divider sx={{ margin: 0 }} ></Divider>
-
       {success && (
-        <>
-    <      FaCheckCircle color="green" size={24} />
-    <p style={{ display: "inline-block", marginLeft: "5px" }}>{message}</p>
-    </>
+        <AlertMessge passedValue={message}/>
 )}
        {!success && (
       <form onSubmit={handleSubmit}>

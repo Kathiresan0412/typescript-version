@@ -1,5 +1,5 @@
 // ** React Imports
-import { ChangeEvent, MouseEvent, ReactNode, useState } from 'react'
+import { ChangeEvent, MouseEvent, ReactNode, useEffect, useState } from 'react'
 
 // ** Next Imports
 import Link from 'next/link'
@@ -38,10 +38,13 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 // ** Demo Imports
 import FooterIllustrationsV1 from 'src/views/pages/auth/FooterIllustration'
+import axios from 'axios'
+import { FaCheckCircle } from 'react-icons/fa'
 
 interface State {
   password: string
   showPassword: boolean
+  email: string
 }
 
 // ** Styled Components
@@ -66,7 +69,8 @@ const LoginPage = () => {
   // ** State
   const [values, setValues] = useState<State>({
     password: '',
-    showPassword: false
+    showPassword: false,
+    email: ''
   })
 
   // ** Hook
@@ -75,15 +79,41 @@ const LoginPage = () => {
 
   const handleChange = (prop: keyof State) => (event: ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [prop]: event.target.value })
+    console.log("values", values);
   }
 
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword })
   }
-
+  const [message, setMessage] = useState<string>('');
+  const [success, setSuccess] = useState<boolean>(false);
   const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
   }
+  const loginUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      // Make PUT request to update service
+      await axios.post(`https://backendserve-production.up.railway.app/api/login`, {
+        user_name: values.email,
+        password: values.password,
+        role: "Admin",
+      });
+      setSuccess(true); // Set success state to true
+      setMessage('Login successfully.');
+      setTimeout(() => {
+        router.push('/');
+      }, 2000);
+
+    } catch (error) {
+      console.error('Error Login:', error);
+      setMessage('Failed to login. Please try again.');
+    }
+  };
+
+  useEffect(() => {
+    console.log("values", values);
+  }, [values])
 
   return (
     <Box className='content-center'>
@@ -169,29 +199,37 @@ const LoginPage = () => {
             <Typography variant='body2'>Please sign-in to your account and start the adventure</Typography>
           </Box>
           <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
-            <TextField autoFocus fullWidth id='email' label='Email' sx={{ marginBottom: 4 }} />
-            <FormControl fullWidth>
-              <InputLabel htmlFor='auth-login-password'>Password</InputLabel>
-              <OutlinedInput
-                label='Password'
-                value={values.password}
-                id='auth-login-password'
-                onChange={handleChange('password')}
-                type={values.showPassword ? 'text' : 'password'}
-                endAdornment={
-                  <InputAdornment position='end'>
-                    <IconButton
-                      edge='end'
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      aria-label='toggle password visibility'
-                    >
-                      {values.showPassword ? <EyeOutline /> : <EyeOffOutline />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-            </FormControl>
+          <TextField
+        autoFocus
+        fullWidth
+        id='email'
+        label='Email'
+        value={values.email}
+        onChange={handleChange('email')}
+        sx={{ marginBottom: 4 }}
+      />
+      <FormControl fullWidth>
+        <InputLabel htmlFor='auth-login-password'>Password</InputLabel>
+        <OutlinedInput
+          label='Password'
+          value={values.password}
+          id='auth-login-password'
+          onChange={handleChange('password')}
+          type={values.showPassword ? 'text' : 'password'}
+          endAdornment={
+            <InputAdornment position='end'>
+              <IconButton
+                edge='end'
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                aria-label='toggle password visibility'
+              >
+                {values.showPassword ? <EyeOutline /> : <EyeOffOutline />}
+              </IconButton>
+            </InputAdornment>
+          }
+        />
+      </FormControl>
             <Box
               sx={{ mb: 4, display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-between' }}
             >
@@ -200,25 +238,23 @@ const LoginPage = () => {
                 <LinkStyled onClick={e => e.preventDefault()}>Forgot Password?</LinkStyled>
               </Link>
             </Box>
+
             <Button
               fullWidth
               size='large'
               variant='contained'
               sx={{ marginBottom: 7 }}
-              onClick={() => router.push('/')}
+              onClick={loginUser} // Call handleLogin when the button is clicked
             >
               Login
             </Button>
-            <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-              <Typography variant='body2' sx={{ marginRight: 2 }}>
-                New on our platform?
-              </Typography>
-              <Typography variant='body2'>
-                <Link passHref href='/pages/register'>
-                  <LinkStyled>Create an account</LinkStyled>
-                </Link>
-              </Typography>
-            </Box>
+            {success && (
+              <>
+                <      FaCheckCircle color="green" size={24} />
+                <p style={{ display: "inline-block", marginLeft: "5px" }}>{message}</p>
+              </>
+            )}
+
             <Divider sx={{ my: 5 }}>or</Divider>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Link href='/' passHref>
@@ -249,6 +285,7 @@ const LoginPage = () => {
       </Card>
       <FooterIllustrationsV1 />
     </Box>
+
   )
 }
 

@@ -10,8 +10,9 @@ import { useEffect, useState } from 'react'
 import 'text-encoding-polyfill';
 import axios from 'axios';
 import { useRouter } from 'next/router'
-import { FaCheckCircle } from 'react-icons/fa';
-import { IServiceType } from '../InterFaces/page'
+
+import AlertMessge from 'src/commponent/messge'
+
 
 
   const EditForm = ({ onClose, input }: { onClose: any, input: number  }) => {
@@ -20,7 +21,7 @@ import { IServiceType } from '../InterFaces/page'
   const [description, setDescription] = useState('');
   const [message, setMessage] = useState<string>('');
   const [success, setSuccess] = useState<boolean>(false);
-  const [updateData, setUpdateData] = useState<IServiceType[]>([]);
+
 
   //setUpdateData([...updateData, { ...updateData[1], name: "" }]);
 
@@ -28,7 +29,7 @@ import { IServiceType } from '../InterFaces/page'
 const route=useRouter();
   useEffect(() => {
     getServices();
-  },);
+  },[]);
 
   const getServices = async () => {
     try {
@@ -44,35 +45,28 @@ const route=useRouter();
     e.preventDefault();
     try {
       // Make PUT request to update service
-      await axios.put(`https://backendserve-production.up.railway.app/api/service-types/${input}`, {
+      await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/service-types/${input}`, {
         name: serviceName,
         description: description
       });
       setSuccess(true); // Set success state to true
-      setMessage('Service updated successfully.');
+      setMessage('Service Type updated successfully.');
 
        route.reload();
 
     } catch (error) {
-      console.error('Error updating service:', error);
-      setMessage('Failed to update service. Please try again.');
+      console.error('Error updating service type:', error);
+      setMessage('Failed to update service type. Please try again.');
     }
   };
 
-  const handleDataChange = () => {
-    const newData = [...updateData];
-    setUpdateData(newData);
-  };
 
   return (
     <Card className='modal1'>
-      <CardHeader title='Edition for A Service' titleTypographyProps={{ variant: 'h6' }}  ></CardHeader>
+      <CardHeader title='Edition for A Service Type' titleTypographyProps={{ variant: 'h6' }}  ></CardHeader>
       <Divider sx={{ margin: 0 }} ></Divider>
       {success && (
-        <>
-    <      FaCheckCircle color="green" size={24} />
-    <p style={{ display: "inline-block", marginLeft: "5px" }}>{message}</p>
-    </>
+       <AlertMessge passedValue={message}/>
 )}
        {!success && (
       <form onSubmit={handleSubmit}>
@@ -84,7 +78,7 @@ const route=useRouter();
                 label='Service Type Name'
                 placeholder='Service Type Name'
                 value={serviceName}
-                onChange={() =>handleDataChange()}
+                onChange={(ev) => setServiceName(ev.target.value.toString())}
 
               //  onChange={(e) => setServiceName(e.target.value)}
               />
@@ -95,7 +89,7 @@ const route=useRouter();
                 label='Description'
                 placeholder='Description'
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(ev) => setDescription(ev.target.value.toString())}
               />
             </Grid>
           </Grid>

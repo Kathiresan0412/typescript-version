@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import AlertMessge from 'src/commponent/messge'
 
 // import { useEffect, useRef } from 'react'
-const DeleteForm = ({ onClose, input }: { onClose: any, input: number }) => {
+const DeleteRatingForm = ({ onClose, input }: { onClose: any, input: number }) => {
   const route = useRouter();
   const [message, setMessage] = useState<string>('');
   const [success, setSuccess] = useState<boolean>(false);
@@ -21,23 +21,23 @@ const DeleteForm = ({ onClose, input }: { onClose: any, input: number }) => {
     try {
       // Make PUT request to update service
       // await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/service-types/${input}`, {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/customers/${input}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/provider-service/${input}`, {
 
       });
       setSuccess(true); // Set success state to true
-      setMessage('Customer Deleted successfully.');
+      setMessage('Gig Deleted successfully.');
 
       route.reload();
 
     } catch (error) {
 
-      setMessage('Failed to delete Customer. Please try again.');
+      setMessage('Failed to delete service. Please try again.');
     }
   };
 
   return (
         <Card className='modal1' >
-          <CardHeader title='Edition for A Customer' titleTypographyProps={{ variant: 'h6' }}  ></CardHeader>
+          <CardHeader title='Delete for A Gig' titleTypographyProps={{ variant: 'h6' }}  ></CardHeader>
           <Divider sx={{ margin: 0 }} ></Divider>
           {success && (
          <AlertMessge passedValue={message}/>
@@ -66,4 +66,4 @@ const DeleteForm = ({ onClose, input }: { onClose: any, input: number }) => {
   );
 }
 
-export default DeleteForm
+export default DeleteRatingForm

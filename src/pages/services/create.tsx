@@ -11,7 +11,6 @@ import axios from 'axios';
 import CloseIcon from '@material-ui/icons/Close';
 import { useRouter } from 'next/router'
 import { ChangeEvent, ElementType, useEffect, useState } from 'react'
-import { FaCheckCircle } from 'react-icons/fa'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
 import FormControl from '@mui/material/FormControl'
@@ -20,8 +19,7 @@ import Box from '@mui/material/Box'
 import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import { IconButton } from '@mui/material'
-
-
+import AlertMessge from 'src/commponent/messge'
 
 const CreateForm = ({ onClose }: { onClose: any }) => {
   const route = useRouter();
@@ -62,7 +60,8 @@ const CreateForm = ({ onClose }: { onClose: any }) => {
     e.preventDefault();
     try {
       // Make PUT request to update service
-      await axios.post(`https://backendserve-production.up.railway.app/api/services`, {
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/services`, {
+
         name: serviceName,
         description: description,
         service_type_id: serviceType,
@@ -87,7 +86,7 @@ const CreateForm = ({ onClose }: { onClose: any }) => {
   const getCategorias = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/service-types`, {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type':'application/json'},
     })
     const response = await res.json();
     setCategorias(response);
@@ -113,10 +112,7 @@ const CreateForm = ({ onClose }: { onClose: any }) => {
       </Grid>
       <Divider sx={{ margin: 0 }} ></Divider>
       {success && (
-        <>
-          <      FaCheckCircle color="green" size={24} />
-          <p style={{ display: "inline-block", marginLeft: "5px" }}>{message}</p>
-        </>
+       <AlertMessge passedValue={message}/>
       )}
       {!success && (
         <form onSubmit={handleSubmit}>

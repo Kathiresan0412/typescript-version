@@ -27,10 +27,9 @@ const MUITablea = () => {
   useEffect(() => { getServices(); }, [])
   const getServices = async () => {
     try {
-      const response = await fetch(`https://backendserve-production.up.railway.app/api/service-types`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/service-types`);
       const data = await response.json();
       setallService(data);
-
     } catch (error) {
     }
   }

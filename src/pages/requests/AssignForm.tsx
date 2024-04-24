@@ -1,28 +1,28 @@
-import Card from '@mui/material/Card'
-import Grid from '@mui/material/Grid'
-import Button from '@mui/material/Button'
-import Divider from '@mui/material/Divider'
-import TextField from '@mui/material/TextField'
-import CardHeader from '@mui/material/CardHeader'
-import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
-import 'text-encoding-polyfill';
+import Card from '@mui/material/Card';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import TextField from '@mui/material/TextField';
+import CardHeader from '@mui/material/CardHeader';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
 import axios from 'axios';
 import CloseIcon from '@material-ui/icons/Close';
-import { useRouter } from 'next/router'
-import MenuItem from '@mui/material/MenuItem'
-import Select from '@mui/material/Select'
-import FormControl from '@mui/material/FormControl'
-import { IconButton, InputLabel } from '@mui/material'
-import AlertMessge from 'src/commponent/messge'
-import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import { IconButton } from '@mui/material';
+import AlertMessge from 'src/commponent/messge';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
-const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
-  // Component logic
+
+export const AssignForm = ({ onClose, input }: { onClose: any; input: number; }) => {
   const [service_provider_id, setService_provider_id] = useState(input);
   const [customer_id, setCustomer_id] = useState('');
   const [from_date_time, setFrom_date_time] = useState('');
@@ -32,39 +32,23 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
   const [status, setStatus] = useState('');
   const [message, setMessage] = useState<string>('');
   const [success, setSuccess] = useState<boolean>(false);
-  const [categorias, setCategorias] = useState([] as any);
+
+  // const [providers, getProviders] = useState([] as any);
+
   const [customers, getCustomers] = useState([] as any);
+
   const route = useRouter();
   useEffect(() => {
-    getServices();
-    getCategorias();
+    console.log("input", input);
+
+    // getGig();
     getCustomerData();
+    setService_provider_id(input);
+
+    // getProvidersData();
+
   }, []);
 
-  const getCategorias = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/service-types`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    })
-    const response = await res.json();
-    setCategorias(response);
-    console.log(categorias);
-  }
-  const getServices = async () => {
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/requests/${input}`);
-      const data = await response.json();
-      setService_provider_id(data.service_provider_id);
-      setCustomer_id(data.customer_id);
-      setFrom_date_time(data.from_date_time),
-        setTo_date_time(data.to_date_time);
-      setAmount(data.amount);
-      setLocation(data.location),
-        setStatus(data.status)
-    } catch (error) {
-      console.error('Error fetching service:', error);
-    }
-  };
   const getCustomerData = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/customers`, {
       method: 'GET',
@@ -74,37 +58,69 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
     getCustomers(response);
   };
 
+  // const getGig = async () => {
+  //   try {
+  //     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/provider-service/${input}`);
+  //     const data = await response.json();
+  //     setProvider_id(data.provider_id);
+  //     setService_id(data.service_id);
+  //     setAmount(data.amount_per_hour);
+  //   } catch (error) {
+  //     console.error('Error fetching service:', error);
+  //   }
+  // };
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   try {
+  //     // Make PUT request to update service
+  //     await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/provider-service/${input}`, {
+  //       service_id: service_id,
+  //       provider_id: provider_id,
+  //       amount_per_hour: amount
+  //     });
+  //     setSuccess(true); // Set success state to true
+  //     setMessage('Gig updated successfully.');
+
+  //     route.reload();
+
+  //   } catch (error) {
+  //     console.error('Error updating service:', error);
+  //     setMessage('Failed to update service. Please try again.');
+  //   }
+  // };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       // Make PUT request to update service
-      await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/requests/${input}`, {
-        service_provider_id: service_provider_id,
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/requests`, {
         customer_id: customer_id,
+        service_provider_id: service_provider_id,
         from_date_time: from_date_time,
         to_date_time: to_date_time,
         amount: amount,
         location: location,
         status: status
+
       });
       setSuccess(true); // Set success state to true
-      setMessage('requests updated successfully.');
+      setMessage('Request Created successfully.');
 
       route.reload();
 
     } catch (error) {
-      console.error('Error updating service:', error);
-      setMessage('Failed to update service. Please try again.');
+      console.error('Error Creation service:', error);
+      setMessage('Failed to Creation service. Please try again.');
     }
   };
 
   return (
     <Card className='modal1'>
       <Grid container justifyContent="space-between">
-        <CardHeader title='Edition for Customer request' titleTypographyProps={{ variant: 'h6' }} />
+        <CardHeader title='Assign a service for a customer' titleTypographyProps={{ variant: 'h6' }} />
         <IconButton aria-label="close" onClick={onClose}><CloseIcon /></IconButton>
       </Grid>
-      <Divider sx={{ margin: 0 }} ></Divider>
+      <Divider sx={{ margin: 0 }}></Divider>
       {success && (
         <AlertMessge passedValue={message} />
       )}
@@ -127,19 +143,19 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
                 </FormControl>
               </Grid>
               {/* <Grid item xs={12} sm={6}>
-             <FormControl fullWidth>
-               <InputLabel> Customer</InputLabel>
-               <Select
-                 label='Service Providers'
-                 defaultValue={provider_id}
-                 onChange={(ev) => setProvider_id(ev.target.value.toString())}
-               >
-                 {providers.map((categoria: any) => (
-                   <MenuItem key={categoria.id} value={categoria.id}>{categoria.name}</MenuItem>
-                 ))}
-               </Select>
-             </FormControl>
-           </Grid> */}
+                <FormControl fullWidth>
+                  <InputLabel> Customer</InputLabel>
+                  <Select
+                    label='Service Providers'
+                    defaultValue={provider_id}
+                    onChange={(ev) => setProvider_id(ev.target.value.toString())}
+                  >
+                    {providers.map((categoria: any) => (
+                      <MenuItem key={categoria.id} value={categoria.id}>{categoria.name}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid> */}
               <Grid item xs={12} sm={6}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DemoContainer components={['DateTimePicker']}>
@@ -209,5 +225,3 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
     </Card>
   );
 };
-
-export default EditForm;

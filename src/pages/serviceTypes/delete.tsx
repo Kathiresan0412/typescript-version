@@ -8,7 +8,7 @@ import CardActions from '@mui/material/CardActions'
 import axios from 'axios'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { FaCheckCircle } from 'react-icons/fa'
+import AlertMessge from 'src/commponent/messge'
 
 // import { useEffect, useRef } from 'react'
 const DeleteForm = ({ onClose, input }: { onClose: any, input: number }) => {
@@ -19,28 +19,24 @@ const DeleteForm = ({ onClose, input }: { onClose: any, input: number }) => {
     e.preventDefault();
     try {
       // Make PUT request to update service
-      await axios.delete(`https://backendserve-production.up.railway.app/api/service-types/${input}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/service-types/${input}`, {
       });
       setSuccess(true); // Set success state to true
-      setMessage('Service Deleted successfully.');
+      setMessage('Service Type Deleted successfully.');
 
       route.reload();
 
     } catch (error) {
-      console.error('Error Delete service type:', error);
       setMessage('Failed to delete service. Please try again.');
     }
   };
 
   return (
         <Card className='modal1' >
-          <CardHeader title='Edition for A Service' titleTypographyProps={{ variant: 'h6' }}  ></CardHeader>
+          <CardHeader title='Delete for A Service' titleTypographyProps={{ variant: 'h6' }}  ></CardHeader>
           <Divider sx={{ margin: 0 }} ></Divider>
           {success && (
-            <>
-              <      FaCheckCircle color="green" size={24} />
-              <p style={{ display: "inline-block", marginLeft: "5px" }}>{message}</p>
-            </>
+            <AlertMessge passedValue={message}/>
           )}
           {!success && (
             <form onSubmit={handleSubmit}>
