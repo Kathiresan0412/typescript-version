@@ -62,14 +62,14 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
 
   const getServices = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/customers/${input}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/providers/${input}`);
       const data = await response.json();
-      setName(data.user.name);
-      setUserName(data.user.user_name);
-      setMobile(data.user.mobile),
-        setEmail(data.user.email);
-      setImg(data.user.img);
-      setPassword(data.user.password)
+      setName(data.name);
+      setUserName(data.user_name);
+      setMobile(data.mobile),
+      setEmail(data.email);
+      setImg(data.img);
+      setPassword(data.password)
       setUserId(data.usr_id);
       console.log("data", data.user);
 
@@ -131,8 +131,8 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
-                  label='Customer Name'
-                  placeholder='Enter customer name'
+                  label='Provider Name'
+                  placeholder='Enter Provider name'
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -140,7 +140,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
-                  label='Customer Email'
+                  label='Provider Email'
                   placeholder='Enter email'
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -150,7 +150,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
-                  label='Customer mobile'
+                  label='Provider mobile'
                   placeholder='Enter mobile No'
                   value={mobile}
                   onChange={(e) => setMobile(e.target.value)}
@@ -159,7 +159,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
-                  label='Customer user name'
+                  label='Provider user name'
                   placeholder='Enter user name '
                   value={user_name}
                   onChange={(e) => setUserName(e.target.value)}
@@ -177,7 +177,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
                 <Grid item xs={12} sm={6}>
                   <TextField
                     fullWidth
-                    label='Customer Passwords'
+                    label='Provider Passwords'
                     placeholder='Enter passwords '
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}

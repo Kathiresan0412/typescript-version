@@ -64,8 +64,8 @@ const Dashboard = () => {
                 stats='862'
                 trend='negative'
                 trendNumber='-18%'
-                title='New Project'
-                subtitle='Yearly Project'
+                title='New Hires'
+                subtitle='Yearly Hires'
                 icon={<BriefcaseVariantOutline />}
               />
             </Grid>

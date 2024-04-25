@@ -24,7 +24,7 @@ const MUITablea = () => {
   useEffect(() => { getServices(); }, [])
   const getServices = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/providers`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/customers`);
       const data = await response.json();
       setAllCustomers(data);
 

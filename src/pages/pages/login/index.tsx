@@ -106,8 +106,11 @@ const LoginPage = () => {
       }, 2000);
 
     } catch (error) {
+      setSuccess(true);
+      setMessage('Please recheck your user name & password');
       console.error('Error Login:', error);
-      setMessage('Failed to login. Please try again.');
+
+     // setMessage('Failed to login. Please try again.');
     }
   };
 
@@ -203,7 +206,7 @@ const LoginPage = () => {
         autoFocus
         fullWidth
         id='email'
-        label='Email'
+        label='User Name'
         value={values.email}
         onChange={handleChange('email')}
         sx={{ marginBottom: 4 }}

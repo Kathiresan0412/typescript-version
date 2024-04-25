@@ -30,11 +30,12 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
 
   const route = useRouter();
   useEffect(() => {
-    console.log("input",input);
-
     getGig();
     getServicesData();
     getProvidersData();
+    console.log("services",Services);
+    console.log("providers",providers);
+
   },[]);
   const getServicesData = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/services`, {
@@ -43,7 +44,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
     })
     const response = await res.json();
     getServices(response);
-    console.log(Services);
+
   }
  const getProvidersData = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/providers`, {
@@ -52,7 +53,6 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
     })
     const response = await res.json();
     getProviders(response);
-    console.log(Services);
   }
   const getGig = async () => {
     try {
@@ -88,7 +88,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
   return (
     <Card className='modal1'>
       <Grid container justifyContent="space-between">
-        <CardHeader title='Edition for A Service' titleTypographyProps={{ variant: 'h6' }} />
+        <CardHeader title='Edition for A Gig' titleTypographyProps={{ variant: 'h6' }} />
         <IconButton aria-label="close" onClick={onClose}><CloseIcon /></IconButton>
       </Grid>
       <Divider sx={{ margin: 0 }} ></Divider>
@@ -104,7 +104,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
                   <InputLabel>Service Provider</InputLabel>
                   <Select
                     label='Service Provider'
-                    defaultValue={provider_id}
+                    value={provider_id}
                     onChange={(ev) => setProvider_id(ev.target.value.toString())}
                   >
                     {providers.map((categoria: any) => (
@@ -118,7 +118,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
                   <InputLabel>Service Name</InputLabel>
                   <Select
                     label='Service Name'
-                    defaultValue={service_id}
+                    value={service_id}
                     onChange={(ev) => setService_id(ev.target.value.toString())}
                   >
                     {Services.map((categoria: any) => (

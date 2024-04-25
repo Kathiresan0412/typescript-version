@@ -16,7 +16,7 @@ const FooterContent = () => {
         <Box component='span' sx={{ color: 'error.main' }}>
 
         </Box>
-        {` by `}<Link target='_blank' href='#'>Gadi Pa</Link>
+        {` by `}<Link target='_blank' href='#'>Guardi Assist</Link>
       </Typography>
     </Box>
   )

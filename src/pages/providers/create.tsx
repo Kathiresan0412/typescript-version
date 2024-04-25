@@ -127,8 +127,8 @@ const CreateForm = ({ onClose }: { onClose: any }) => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
-                  label='Customer Name'
-                  placeholder='Enter customer name'
+                  label='Provider Name'
+                  placeholder='Enter Provider name'
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -136,7 +136,7 @@ const CreateForm = ({ onClose }: { onClose: any }) => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
-                  label='Customer Email'
+                  label='Provider Email'
                   placeholder='Enter email'
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -146,7 +146,7 @@ const CreateForm = ({ onClose }: { onClose: any }) => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
-                  label='Customer mobile'
+                  label='Provider mobile'
                   placeholder='Enter mobile No'
                   value={mobile}
                   onChange={(e) => setMobile(e.target.value)}
@@ -155,7 +155,7 @@ const CreateForm = ({ onClose }: { onClose: any }) => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
-                  label='Customer user name'
+                  label='Provider user name'
                   placeholder='Enter user name '
                   value={user_name}
                   onChange={(e) => setUserName(e.target.value)}
@@ -165,7 +165,7 @@ const CreateForm = ({ onClose }: { onClose: any }) => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
-                  label='Customer Passwords'
+                  label='Provider Passwords'
                   placeholder='Enter passwords '
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}

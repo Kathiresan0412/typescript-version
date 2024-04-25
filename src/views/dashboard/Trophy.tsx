@@ -38,7 +38,7 @@ const Trophy = () => {
           Rs 162.8k
         </Typography>
         <Button size='small' variant='contained'>
-          View Sales
+          View Orders
         </Button>
         <TriangleImg alt='triangle background' src={`/images/misc/${imageSrc}`} />
         <TrophyImg alt='trophy' src='/images/misc/trophy.png' />

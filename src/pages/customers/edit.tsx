@@ -64,12 +64,12 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/customers/${input}`);
       const data = await response.json();
-      setName(data.user.name);
-      setUserName(data.user.user_name);
-      setMobile(data.user.mobile),
-        setEmail(data.user.email);
-      setImg(data.user.img);
-      setPassword(data.user.password)
+      setName(data.name);
+      setUserName(data.user_name);
+      setMobile(data.mobile),
+        setEmail(data.email);
+      setImg(data.img);
+      setPassword(data.password)
       setUserId(data.usr_id);
       console.log("data", data.user);
 

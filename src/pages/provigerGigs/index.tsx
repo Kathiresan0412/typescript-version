@@ -94,12 +94,12 @@ const MUITablea = () => {
                         alt={row.provider_name}
                         src={row.img}
                         sx={{ width: 56, height: 60 }}
-                      />&nbsp;&nbsp; {row.provider_name}
+                      /> {row.provider_name}
                     </TableCell>
                     <TableCell align='center' style={{ fontSize: 17, minWidth: 150 }}>{row.service_name}</TableCell>
                     <TableCell align='center' style={{ fontSize: 17, minWidth: 150 }}>{row.service_type_name}</TableCell>
-                    <TableCell align='center' style={{ fontSize: 17, minWidth: 150 }}>{row.amount_per_hour}{".Rs"}</TableCell>
-                    <TableCell align='center' style={{ fontSize: 17 }}>
+                    <TableCell align='center' style={{ fontSize: 17, minWidth: 100 }}>{row.amount_per_hour}{".Rs"}</TableCell>
+                    <TableCell align='center' style={{ fontSize: 17, minWidth: 250 }}>
                       <IconButton aria-label="edit" onClick={edit}><EditIcon /></IconButton>
                       <IconButton aria-label="delete" onClick={deleteform}><DeleteIcon /></IconButton>
                       <IconButton aria-label="s" onClick={rating}><RemoveRedEyeIcon /></IconButton>
