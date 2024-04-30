@@ -32,7 +32,7 @@ const data: DataType[] = [
     title: 'Zipcar',
     color: 'primary',
     amount: '24,895.65 Rs',
-    subtitle: 'Vuejs, React & HTML',
+    subtitle: '',
     imgSrc: '/images/cards/logo-zipcar.png'
   },
   {
@@ -41,7 +41,7 @@ const data: DataType[] = [
     imgHeight: 27,
     title: 'Bitbank',
     amount: '8,650.20 Rs',
-    subtitle: 'Sketch, Figma & XD',
+    subtitle: '',
     imgSrc: '/images/cards/logo-bitbank.png'
   },
   {
@@ -50,7 +50,7 @@ const data: DataType[] = [
     title: 'Aviato',
     color: 'secondary',
     amount: '1,245.80 Rs',
-    subtitle: 'HTML & Angular',
+    subtitle: '',
     imgSrc: '/images/cards/logo-aviato.png'
   }
 ]

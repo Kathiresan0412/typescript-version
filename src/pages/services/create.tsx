@@ -61,7 +61,6 @@ const CreateForm = ({ onClose }: { onClose: any }) => {
     try {
       // Make PUT request to update service
       await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/services`, {
-
         name: serviceName,
         description: description,
         service_type_id: serviceType,
@@ -69,9 +68,7 @@ const CreateForm = ({ onClose }: { onClose: any }) => {
       });
       setSuccess(true); // Set success state to true
       setMessage('Service Created successfully.');
-
       route.reload();
-
     } catch (error) {
       console.error('Error Creation service:', error);
       setMessage('Failed to Creation service. Please try again.');

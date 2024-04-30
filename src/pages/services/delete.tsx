@@ -20,17 +20,11 @@ const DeleteForm = ({ onClose, input }: { onClose: any, input: number }) => {
     e.preventDefault();
     try {
       // Make PUT request to update service
-      // await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/service-types/${input}`, {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/services/${input}`, {
-
-      });
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/services/${input}`, {});
       setSuccess(true); // Set success state to true
       setMessage('Service Deleted successfully.');
-
       route.reload();
-
     } catch (error) {
-
       setMessage('Failed to delete service. Please try again.');
     }
   };

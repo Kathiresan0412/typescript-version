@@ -37,7 +37,7 @@ const DeleteForm = ({ onClose, input }: { onClose: any, input: number }) => {
 
   return (
         <Card className='modal1' >
-          <CardHeader title='Edition for A Customer' titleTypographyProps={{ variant: 'h6' }}  ></CardHeader>
+          <CardHeader title='Deletion for A Customer' titleTypographyProps={{ variant: 'h6' }}  ></CardHeader>
           <Divider sx={{ margin: 0 }} ></Divider>
           {success && (
          <AlertMessge passedValue={message}/>

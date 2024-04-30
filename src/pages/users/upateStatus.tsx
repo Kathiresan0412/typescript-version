@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import AlertMessge from 'src/commponent/messge'
 
 // import { useEffect, useRef } from 'react'
-const DeleteForm = ({ onClose, input }: { onClose: any, input: number }) => {
+const UpdateStatus = ({ onClose, input }: { onClose: any, input: number }) => {
   const route = useRouter();
   const [message, setMessage] = useState<string>('');
   const [success, setSuccess] = useState<boolean>(false);
@@ -21,11 +21,11 @@ const DeleteForm = ({ onClose, input }: { onClose: any, input: number }) => {
     try {
       // Make PUT request to update service
       // await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/service-types/${input}`, {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/users/${input}`, {
+      await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/users/${input}`, {
 
       });
       setSuccess(true); // Set success state to true
-      setMessage(' Inactivated successfully.');
+      setMessage(' Activated successfully.');
 
       route.reload();
 
@@ -37,7 +37,7 @@ const DeleteForm = ({ onClose, input }: { onClose: any, input: number }) => {
 
   return (
         <Card className='modal1' >
-          <CardHeader title='Inactivation for User Status' titleTypographyProps={{ variant: 'h6' }}  ></CardHeader>
+          <CardHeader title='Activation for User Status' titleTypographyProps={{ variant: 'h6' }}  ></CardHeader>
           <Divider sx={{ margin: 0 }} ></Divider>
           {success && (
          <AlertMessge passedValue={message}/>
@@ -66,4 +66,4 @@ const DeleteForm = ({ onClose, input }: { onClose: any, input: number }) => {
   );
 }
 
-export default DeleteForm
+export default UpdateStatus

@@ -91,9 +91,7 @@ const EditForm = ({ onClose, input }: { onClose: any, input: number }) => {
       });
       setSuccess(true); // Set success state to true
       setMessage('Service updated successfully.');
-
       route.reload();
-
     } catch (error) {
       console.error('Error updating service:', error);
       setMessage('Failed to update service. Please try again.');

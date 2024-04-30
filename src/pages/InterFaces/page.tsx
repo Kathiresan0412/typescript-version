@@ -23,6 +23,7 @@ export interface ICustomers {
   user_name?:string
   password?:string,
   role?:string
+  status?:string
 }
 export interface IRatings {
   index:number

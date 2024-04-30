@@ -87,7 +87,7 @@ const FormLayoutsSeparator = () => {
 
   return (
     <Card >
-      <CardHeader title='Creation for A Service' titleTypographyProps={{ variant: 'h6' }} />
+      <CardHeader title='Edit my details' titleTypographyProps={{ variant: 'h6' }} />
       <Divider sx={{ margin: 0 }} />
       <form onSubmit={e => e.preventDefault()}>
         <CardContent>
@@ -98,17 +98,17 @@ const FormLayoutsSeparator = () => {
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label='Username' placeholder='carterLeonard' />
+              <TextField fullWidth label='Username' placeholder='carterLeonard'  value={"jathusanAdmin23"}/>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth type='email' label='Email' placeholder='carterleonard@gmail.com' />
+              <TextField fullWidth type='email' label='Email' value={"alanbilla2023@gmail.com"}/>
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
                 <InputLabel htmlFor='form-layouts-separator-password'>Password</InputLabel>
                 <OutlinedInput
                   label='Password'
-                  value={values.password}
+                  value={"jathusanAdmin23"}
                   id='form-layouts-separator-password'
                   onChange={handlePasswordChange('password')}
                   type={values.showPassword ? 'text' : 'password'}
@@ -131,7 +131,7 @@ const FormLayoutsSeparator = () => {
               <FormControl fullWidth>
                 <InputLabel htmlFor='form-layouts-separator-password-2'>Confirm Password</InputLabel>
                 <OutlinedInput
-                  value={values.password2}
+                  value={"jathusanAdmin23"}
                   label='Confirm Password'
                   id='form-layouts-separator-password-2'
                   onChange={handleConfirmChange('password2')}
@@ -160,20 +160,21 @@ const FormLayoutsSeparator = () => {
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label='First Name' placeholder='Leonard' />
+              <TextField fullWidth label='First Name' placeholder='Leonard' value={"Jathusan"}/>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label='Last Name' placeholder='Carter' />
+              <TextField fullWidth label='Last Name' placeholder='Carter' value={"Thurai"}/>
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
                 <InputLabel id='form-layouts-separator-select-label'>Country</InputLabel>
                 <Select
                   label='Country'
-                  defaultValue=''
+                  defaultValue='Srilanka'
                   id='form-layouts-separator-select'
                   labelId='form-layouts-separator-select-label'
                 >
+                  <MenuItem value='Srilanka'>Sri Lanka</MenuItem>
                   <MenuItem value='UK'>UK</MenuItem>
                   <MenuItem value='USA'>USA</MenuItem>
                   <MenuItem value='Australia'>Australia</MenuItem>
@@ -186,13 +187,15 @@ const FormLayoutsSeparator = () => {
                 <InputLabel id='form-layouts-separator-multiple-select-label'>Language</InputLabel>
                 <Select
                   multiple
+                  defaultValue={['Tamil']}
                   value={language}
                   onChange={handleSelectChange}
                   id='form-layouts-separator-multiple-select'
                   labelId='form-layouts-separator-multiple-select-label'
-                  input={<OutlinedInput label='Language' id='select-multiple-language' />}
+                  input={<OutlinedInput label='Language' id='select-multiple-language'defaultValue={'Tamil'} />}
                 >
                   <MenuItem value='English'>English</MenuItem>
+                  <MenuItem value='Tamil'>Tamil</MenuItem>
                   <MenuItem value='French'>French</MenuItem>
                   <MenuItem value='Spanish'>Spanish</MenuItem>
                   <MenuItem value='Portuguese'>Portuguese</MenuItem>
@@ -211,10 +214,11 @@ const FormLayoutsSeparator = () => {
                 customInput={<CustomInput />}
                 id='form-layouts-separator-date'
                 onChange={(date: Date) => setDate(date)}
+                value='04-12-2001'
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label='Phone No.' placeholder='+1-123-456-8790' />
+              <TextField fullWidth label='Phone No.'  value={"+9413243644"}/>
             </Grid>
           </Grid>
         </CardContent>
