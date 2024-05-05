@@ -20,7 +20,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-
+import dayjs from 'dayjs'; // Import dayjs for date formatting
 
 export const AssignForm = ({ onClose, input }: { onClose: any; input: number; }) => {
   const [service_provider_id, setService_provider_id] = useState(input);
@@ -39,7 +39,7 @@ export const AssignForm = ({ onClose, input }: { onClose: any; input: number; })
 
   const route = useRouter();
   useEffect(() => {
-    console.log("input", input);
+
 
     // getGig();
     getCustomerData();
@@ -49,6 +49,18 @@ export const AssignForm = ({ onClose, input }: { onClose: any; input: number; })
 
   }, []);
 
+  const handleFromDateTimeChange = (date:any) => {
+    const formattedDate = dayjs(date).format('YYYY-MM-DD HH:mm:ss'); // Format the selected date
+    setFrom_date_time(formattedDate);
+    console.log("from_date_time", from_date_time);
+  };
+  const handelToDateTimeChange = (date:any) => {
+    const formattedDate = dayjs(date).format('YYYY-MM-DD HH:mm:ss'); // Format the selected date
+    setTo_date_time(formattedDate);
+    console.log("to_date_time", to_date_time);
+  };
+
+
   const getCustomerData = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/customers`, {
       method: 'GET',
@@ -57,37 +69,6 @@ export const AssignForm = ({ onClose, input }: { onClose: any; input: number; })
     const response = await res.json();
     getCustomers(response);
   };
-
-  // const getGig = async () => {
-  //   try {
-  //     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/provider-service/${input}`);
-  //     const data = await response.json();
-  //     setProvider_id(data.provider_id);
-  //     setService_id(data.service_id);
-  //     setAmount(data.amount_per_hour);
-  //   } catch (error) {
-  //     console.error('Error fetching service:', error);
-  //   }
-  // };
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   try {
-  //     // Make PUT request to update service
-  //     await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/provider-service/${input}`, {
-  //       service_id: service_id,
-  //       provider_id: provider_id,
-  //       amount_per_hour: amount
-  //     });
-  //     setSuccess(true); // Set success state to true
-  //     setMessage('Gig updated successfully.');
-
-  //     route.reload();
-
-  //   } catch (error) {
-  //     console.error('Error updating service:', error);
-  //     setMessage('Failed to update service. Please try again.');
-  //   }
-  // };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -108,11 +89,21 @@ export const AssignForm = ({ onClose, input }: { onClose: any; input: number; })
 
       route.reload();
 
-    } catch (error) {
-      console.error('Error Creation service:', error);
-      setMessage('Failed to Creation service. Please try again.');
+    } catch (error:any) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error('Server responded with an error:', error.response.data);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error('No response received from the server:', error.request);
+      } else {
+        // Something happened in setting up the request that triggered an error
+        console.error('Error setting up the request:', error.message);
+      }
+      setMessage('Failed to create service. Please try again.');
     }
-  };
+    }  ;
 
   return (
     <Card className='modal1'>
@@ -156,13 +147,17 @@ export const AssignForm = ({ onClose, input }: { onClose: any; input: number; })
                   </Select>
                 </FormControl>
               </Grid> */}
-              <Grid item xs={12} sm={6}>
+
+
+               <Grid item xs={12} sm={6}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DemoContainer components={['DateTimePicker']}>
                     <DateTimePicker
                       label="Basic date time picker"
-                      value={from_date_time}
-                      onChange={(e: any) => setFrom_date_time(e.target.value)} />
+                       onChange={handleFromDateTimeChange}
+
+                   //  value={from_date_time}
+                      />
                   </DemoContainer>
                 </LocalizationProvider>
 
@@ -172,8 +167,13 @@ export const AssignForm = ({ onClose, input }: { onClose: any; input: number; })
                   <DemoContainer components={['DateTimePicker']}>
                     <DateTimePicker
                       label="Basic date time picker"
-                      value={to_date_time}
-                      onChange={(e: any) => setTo_date_time(e.target.value)} />
+
+                    //  value={to_date_time}
+
+                      onChange={handelToDateTimeChange}
+
+                   //   onChange={(e: any) => setTo_date_time(e.target.value)}
+                   />
                   </DemoContainer>
                 </LocalizationProvider>
               </Grid>
@@ -196,7 +196,7 @@ export const AssignForm = ({ onClose, input }: { onClose: any; input: number; })
               </Grid>
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth>
-                  <InputLabel>Service Name</InputLabel>
+                  <InputLabel>Service status</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"

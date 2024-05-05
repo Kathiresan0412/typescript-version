@@ -85,7 +85,7 @@ const MUITablea = () => {
               <TableBody>
                 {allGigs?.map((row, index) =>
                   <TableRow key={row.id} onClick={() => {
-                    console.log("Clicked row ID:", allGigs);
+                    console.log("Clicked row ID:", row.id);
                     handleRowClick(row.id)
                   }} sx={{ '&:last-of-type  td, &:last-of-type  th': { border: 0 } }} >
                     <TableCell align='center' style={{ fontSize: 17, minWidth: 150 }}>{index + 1}</TableCell>
