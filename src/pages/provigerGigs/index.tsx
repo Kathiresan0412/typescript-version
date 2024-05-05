@@ -13,10 +13,11 @@ import { IGigs } from '../InterFaces/page'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import RatingForm from './rating'
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
-import { AssignForm } from '../requests/AssignForm'
+import AssignForm from '../requests/AssignForm'
 
 
-const MUITablea = () => {
+
+const MUITableaa = () => {
   const [allGigs, setAllGigs] = useState([] as IGigs[]);
   const [showForm1, setShowForm1] = useState(false);
   const [editForm, setEditForm1] = useState(false);
@@ -98,7 +99,7 @@ const MUITablea = () => {
                     </TableCell>
                     <TableCell align='center' style={{ fontSize: 17, minWidth: 150 }}>{row.service_name}</TableCell>
                     <TableCell align='center' style={{ fontSize: 17, minWidth: 150 }}>{row.service_type_name}</TableCell>
-                    <TableCell align='center' style={{ fontSize: 17, minWidth: 100 }}>{row.amount_per_hour}{".Rs"}</TableCell>
+                    <TableCell align='center' style={{ fontSize: 17, minWidth: 100 }}>{"Rs "}{row.amount_per_hour}</TableCell>
                     <TableCell align='center' style={{ fontSize: 17, minWidth: 250 }}>
                       <IconButton aria-label="edit" onClick={edit}><EditIcon /></IconButton>
                       <IconButton aria-label="delete" onClick={deleteform}><DeleteIcon /></IconButton>
@@ -139,4 +140,4 @@ const MUITablea = () => {
     </Grid>
   );
 }
-export default MUITablea
+export default MUITableaa

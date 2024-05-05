@@ -22,7 +22,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import dayjs from 'dayjs'; // Import dayjs for date formatting
 
-export const AssignForm = ({ onClose, input }: { onClose: any; input: number; }) => {
+ const AssignForm = ({ onClose, input }: { onClose: any; input: number; }) => {
   const [service_provider_id, setService_provider_id] = useState(input);
   const [customer_id, setCustomer_id] = useState('');
   const [from_date_time, setFrom_date_time] = useState('');
@@ -87,7 +87,9 @@ export const AssignForm = ({ onClose, input }: { onClose: any; input: number; })
       setSuccess(true); // Set success state to true
       setMessage('Request Created successfully.');
 
-      route.reload();
+      setTimeout(() => {
+        route.push('/provigerGigs');
+      }, 1000);
 
     } catch (error:any) {
       if (error.response) {
@@ -201,11 +203,11 @@ export const AssignForm = ({ onClose, input }: { onClose: any; input: number; })
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={status}
-                    label="Age"
+                    label="Service status"
                     onChange={(ev) => setStatus(ev.target.value.toString())}>
-                    <MenuItem value={10}>Pending</MenuItem>
-                    <MenuItem value={20}>Approved</MenuItem>
-                    <MenuItem value={30}>Rejected</MenuItem>
+                    <MenuItem value={"Pending"}>Pending</MenuItem>
+                    <MenuItem value={"Approved"}>Approved</MenuItem>
+                    <MenuItem value={"Approved"}>Approved</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -225,3 +227,5 @@ export const AssignForm = ({ onClose, input }: { onClose: any; input: number; })
     </Card>
   );
 };
+
+export default AssignForm

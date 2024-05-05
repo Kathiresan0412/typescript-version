@@ -79,7 +79,7 @@ const MUITablea = () => {
                     <TableCell align='center' style={{ fontSize: 17 , minWidth: 150}}>{row.from_date_time}</TableCell>
                     <TableCell align='center' style={{ fontSize: 17, minWidth: 150 }}>{row.to_date_time}</TableCell>
                     <TableCell align='center' style={{ fontSize: 17, minWidth: 150 }}>{row.location}</TableCell>
-                    <TableCell align='center' style={{ fontSize: 17, minWidth: 150 }}>{row.amount}{".Rs"}</TableCell>
+                    <TableCell align='center' style={{ fontSize: 17, minWidth: 150 }}>{"Rs "}{row.amount}</TableCell>
                     <TableCell align='center' style={{ fontSize: 17, minWidth: 150 }}>{row.status}</TableCell>
                     <TableCell align='center' style={{ fontSize: 17, minWidth: 200  }}><IconButton aria-label="edit" onClick={edit}><EditIcon /></IconButton>
                       <IconButton aria-label="delete" onClick={deleteform}><DeleteIcon /></IconButton>

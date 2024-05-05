@@ -1,3 +1,4 @@
+
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
@@ -6,41 +7,47 @@ import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
 import axios from 'axios'
+import CloseIcon from '@material-ui/icons/Close';
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-
 import AlertMessge from 'src/commponent/messge'
+import { IconButton } from '@mui/material'
 
 // import { useEffect, useRef } from 'react'
 const DeleteForm = ({ onClose, input }: { onClose: any, input: number }) => {
   const route = useRouter();
   const [message, setMessage] = useState<string>('');
   const [success, setSuccess] = useState<boolean>(false);
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      // Make PUT request to update service
-      // await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/service-types/${input}`, {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/requests/${input}`, {
+const handleSubmit = async (e: React.FormEvent) => {
 
-      });
-      setSuccess(true); // Set success state to true
-      setMessage('Service request Deleted successfully.');
+  e.preventDefault();
+  try {
+    // Make PUT request to update service
+    // await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/service-types/${input}`, {
+    await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/requests/${input}`, {
 
-      route.reload();
+    });
+    setSuccess(true); // Set success state to true
+    setMessage('Service request Deleted successfully.');
 
-    } catch (error) {
+    route.reload();
+      route.push('/requests');
 
-      setMessage('Failed to delete service. Please try again.');
-    }
-  };
+
+  } catch (error) {
+
+    setMessage('Failed to delete service. Please try again.');
+  }
+};
 
   return (
         <Card className='modal1' >
-          <CardHeader title='Delete for A Service request' titleTypographyProps={{ variant: 'h6' }}  ></CardHeader>
-          <Divider sx={{ margin: 0 }} ></Divider>
+          <CardHeader title='Deletion for A request' titleTypographyProps={{ variant: 'h6' }}  ></CardHeader>
+          <IconButton aria-label="close" onClick={onClose}><CloseIcon /></IconButton>
+
+      <Divider sx={{ margin: 0 }}></Divider>
           {success && (
-         <AlertMessge passedValue={message}/>
+            <AlertMessge passedValue={message}/>
           )}
           {!success && (
             <form onSubmit={handleSubmit}>
